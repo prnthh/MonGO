@@ -78,7 +78,7 @@ def db(arg):
 		print "Error: specify database name."
 
 def helper(arg):
-	helps = {"count [json]":"Counts the number of documents in a db.\nWith an argument, returns the number of matching documents.", "findall":"Returns all documents in the current db.", "find [json]":"Finds and returns all documents containing the given key-value pair.\nWithout arguments, it returns the first document in the db.", "insert [json data]":"Inserts a json document into the db.\nWithout the arguments, it enters an interactive prompt to create documents.", "help":"Displays this helpfile.", "exit":"Exits the MonGo shell."}
+	helps = {"db <dbname>":"Specify the db being accessed.", "count [json]":"Counts the number of documents in a db.\nWith an argument, returns the number of matching documents.", "findall":"Returns all documents in the current db.", "find [json]":"Finds and returns all documents containing the given key-value pair.\nWithout arguments, it returns the first document in the db.", "insert [json data]":"Inserts a json document into the db.\nWithout the arguments, it enters an interactive prompt to create documents.", "help":"Displays this helpfile.", "exit":"Exits the MonGo shell."}
 	if arg in helps:
 		print arg
 		print helps[arg],"\n"
@@ -96,10 +96,11 @@ if __name__=="__main__":
 	print "MonGO version 0.0.1 developed by Pranith Hengavalli"
 	ip = raw_input("Enter IP address[default:localhost]: ")
 	if ip=="":
-		ip = "10.0.0.103"
+		ip = "localhost"
 	port = int(raw_input("Enter port[default:27017]: ") or 27017)
+	print "Connecting to %s:%s" % (ip, port)
 	client = MongoClient(ip, port)
-	print "Connected to %s:%s successfully. " % (ip, port)
+	print "Success. "
 	interpret()
 
 """ To include these functions within your own scripts,
